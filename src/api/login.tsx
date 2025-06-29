@@ -9,7 +9,7 @@ export type LoginResponse = {
 
 }
 
-export async function login (username: string, password: string):Promise<void> {
+export async function login ({username, password}: LoginFields):Promise<LoginResponse> {
   const form = new URLSearchParams();
   form.append("username", username);
   form.append("password", password);
