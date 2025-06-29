@@ -1,6 +1,8 @@
 import {type ReactNode, useEffect, useState} from "react";
-import {getCookie} from "@/utils/cookies.ts";
+import {deleteCookie, getCookie, setCookie} from "@/utils/cookies.ts";
 import {jwtDecode} from "jwt-decode";
+import {login, type LoginFields} from "@/api/login.tsx";
+import {AuthContext} from "./AuthContext.tsx";
 
 type JwtPayload = {
   email?: string;
@@ -35,9 +37,45 @@ export const AuthProvider = ({children}:{children: ReactNode}) => {
 
   }, []);
 
-  return (
-    <>
+  const loginUser = async (fields: LoginFields) => {
+    const res = await login(fields)
+    setCookie("access_token", res.access_token, {
+      expires: 1,
+      sameSite: "Lax",
+      secure: false, // επειδή τρέχουμε σε localhost, αλλιώς πάντα true
+      path: "/"
+    })
 
-    </>
-  )
-}
+    setAccessToken(res.access_token);
+
+    try {
+      const decoded: JwtPayload = jwtDecode(res.access_token);
+      setTenantId(decoded.tenant_id ?? null);
+    } catch {
+      setTenantId(null);
+    }
+
+    setLoading(false);
+  }
+
+  const logout = () => {
+    deleteCookie("access_token");
+    setAccessToken(null);
+    setTenantId(null);
+  }
+
+  return (
+      <AuthContext.Provider
+        value={{
+          isAuthenticated: !!accessToken, // αν υπάρχει είναι authenticated
+          accessToken,
+          tenantId,
+          loginUser,
+          logout,
+          loading
+        }}
+      >
+        {loading ? null : children}
+      </AuthContext.Provider>
+    )
+};
