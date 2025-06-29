@@ -5,11 +5,12 @@ import ProductListPage from "@/pages/ProductListPage.tsx";
 import ProductPage from "@/pages/ProductPage.tsx";
 import NotFoundPage from "@/pages/NotFoundPage.tsx";
 import Layout from "@/components/Layout.tsx";
+import {AuthProvider} from "@/context/AuthProvider.tsx";
 
 function App() {
   return (
     <>
-
+      <AuthProvider>
         <BrowserRouter>
           <Routes>
             <Route element={<Layout />}>
@@ -27,6 +28,7 @@ function App() {
           </Routes>
         </BrowserRouter>
         <Toaster richColors />
+      </AuthProvider>
     </>
   );
 }
