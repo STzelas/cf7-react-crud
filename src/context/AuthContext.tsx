@@ -1,11 +1,13 @@
 import { createContext } from "react";
+import type {LoginFields} from "@/api/login.tsx";
 
 type AuthContextProps = {
   isAuthenticated: boolean;
   accessToken: string | null;
   tenantId: string | null;
-  loginUser: () => Promise<void>;
+  loginUser: (fields: LoginFields) => Promise<void>;
   logout: () => void;
+  loading: boolean;
 }
 
 export const AuthContext = createContext<AuthContextProps | undefined>(undefined);
