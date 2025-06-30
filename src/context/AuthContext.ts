@@ -6,7 +6,7 @@ type AuthContextProps = {
   accessToken: string | null;
   tenantId: string | null;
   loginUser: (fields: LoginFields) => Promise<void>;
-  logout: () => void;
+  logoutUser: () => void;
   loading: boolean;
 }
 
