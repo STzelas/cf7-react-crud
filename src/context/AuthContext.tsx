@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import type {LoginFields} from "@/api/login.tsx";
+import type {LoginFields} from "@/api/login.ts";
 
 type AuthContextProps = {
   isAuthenticated: boolean;
