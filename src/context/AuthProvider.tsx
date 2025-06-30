@@ -2,7 +2,7 @@ import {type ReactNode, useEffect, useState} from "react";
 import {deleteCookie, getCookie, setCookie} from "@/utils/cookies.ts";
 import {jwtDecode} from "jwt-decode";
 import {login, type LoginFields} from "@/api/login.ts";
-import {AuthContext} from "./AuthContext.tsx";
+import {AuthContext} from "./AuthContext.ts";
 
 type JwtPayload = {
   email?: string;
@@ -58,7 +58,7 @@ export const AuthProvider = ({children}:{children: ReactNode}) => {
     setLoading(false);
   }
 
-  const logout = () => {
+  const logoutUser = () => {
     deleteCookie("access_token");
     setAccessToken(null);
     setTenantId(null);
@@ -71,7 +71,7 @@ export const AuthProvider = ({children}:{children: ReactNode}) => {
           accessToken,
           tenantId,
           loginUser,
-          logout,
+          logoutUser,
           loading
         }}
       >
