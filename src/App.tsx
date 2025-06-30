@@ -7,6 +7,7 @@ import NotFoundPage from "@/pages/NotFoundPage.tsx";
 import Layout from "@/components/Layout.tsx";
 import {AuthProvider} from "@/context/AuthProvider.tsx";
 import LoginPage from "@/pages/LoginPage.tsx";
+import ProtectedRoute from "@/components/ProtectedRoute.tsx";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
 
               <Route path="login" element={<LoginPage/>}/>
 
-              <Route path="products">
+              <Route path="products" element={<ProtectedRoute/>}>
                 <Route index element={<ProductListPage />} />
                 <Route path="new" element={<ProductPage mode="create" />} />
                 <Route
