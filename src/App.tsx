@@ -6,6 +6,7 @@ import ProductPage from "@/pages/ProductPage.tsx";
 import NotFoundPage from "@/pages/NotFoundPage.tsx";
 import Layout from "@/components/Layout.tsx";
 import {AuthProvider} from "@/context/AuthProvider.tsx";
+import LoginPage from "@/pages/LoginPage.tsx";
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
           <Routes>
             <Route element={<Layout />}>
               <Route index element={<HomePage />} />
+
+              <Route path="login" element={<LoginPage/>}/>
+
               <Route path="products">
                 <Route index element={<ProductListPage />} />
                 <Route path="new" element={<ProductPage mode="create" />} />
