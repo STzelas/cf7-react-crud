@@ -65,7 +65,7 @@ export default function LoginPage() {
         </div>
 
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Logging ..." : "Login"}
+          {isSubmitting ? "Logging in..." : "Login"}
         </Button>
       </form>
     </>
